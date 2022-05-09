@@ -1,8 +1,8 @@
-package com.newsdoubletwobyte.newsapp.data.api.pojo
+package com.newsdoubletwobyte.newsapp.data.net.api.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Source(
+data class SourceDto(
     @SerializedName("id")
     private val id: String,
     @SerializedName("name")

@@ -1,6 +1,6 @@
-package com.newsdoubletwobyte.newsapp.data.api
+package com.newsdoubletwobyte.newsapp.data.net.api
 
-import com.newsdoubletwobyte.newsapp.data.api.pojo.Data
+import com.newsdoubletwobyte.newsapp.data.net.api.model.DataDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,7 +13,7 @@ interface NewsApiService {
         @Query(QUERY_LANGUAGE) language: String = LANGUAGE,
         @Query(QUERY_PAGE) page: String = DEFAULT_PAGE,
         @Query(QUERY_API_KEY) apiKey: String = API_KEY
-    ): Data
+    ): DataDto
 
     private companion object {
 

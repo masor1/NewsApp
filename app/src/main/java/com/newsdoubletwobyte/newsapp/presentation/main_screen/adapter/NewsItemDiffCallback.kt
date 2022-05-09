@@ -1,13 +1,13 @@
 package com.newsdoubletwobyte.newsapp.presentation.main_screen.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.newsdoubletwobyte.newsapp.domain.pojo.News
+import com.newsdoubletwobyte.newsapp.domain.model.NewsDomain
 
-class NewsItemDiffCallback : DiffUtil.ItemCallback<News>() {
+class NewsItemDiffCallback : DiffUtil.ItemCallback<NewsDomain>() {
 
-    override fun areItemsTheSame(oldItem: News, newItem: News) =
+    override fun areItemsTheSame(oldItem: NewsDomain, newItem: NewsDomain) =
         oldItem.areItemsTheSame(newItem)
 
-    override fun areContentsTheSame(oldItem: News, newItem: News) =
+    override fun areContentsTheSame(oldItem: NewsDomain, newItem: NewsDomain) =
         oldItem.areContentsTheSame(newItem)
 }

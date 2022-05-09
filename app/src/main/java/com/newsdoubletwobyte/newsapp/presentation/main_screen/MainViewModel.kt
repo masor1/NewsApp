@@ -5,28 +5,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.newsdoubletwobyte.newsapp.core.Fetch
-import com.newsdoubletwobyte.newsapp.domain.pojo.News
+import com.newsdoubletwobyte.newsapp.domain.model.NewsDomain
 import com.newsdoubletwobyte.newsapp.domain.usecase.FetchNews
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val newsUseCase: FetchNews,
-    private val dispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Main
 ) : ViewModel(), Fetch<Unit> {
 
-    private val _news = MutableLiveData<List<News>>()
-    val news: LiveData<List<News>> = _news
-
-    private var count = 1
+    private val _news = MutableLiveData<List<NewsDomain>>()
+    val news: LiveData<List<NewsDomain>> = _news
 
     init {
         viewModelScope.launch(dispatcher) {
-            fetch()
+            fetch("1")
         }
     }
 
-    override suspend fun fetch(page: Int) {
+    override suspend fun fetch(page: String) {
         viewModelScope.launch(dispatcher) {
             val news = newsUseCase.fetch(page)
             _news.postValue(news)

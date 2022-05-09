@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.newsdoubletwobyte.newsapp.databinding.NewsItemBinding
-import com.newsdoubletwobyte.newsapp.domain.pojo.News
+import com.newsdoubletwobyte.newsapp.domain.model.NewsDomain
 
-class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(
+class NewsAdapter : ListAdapter<NewsDomain, NewsAdapter.NewsViewHolder>(
     NewsItemDiffCallback()
 ) {
 
@@ -30,7 +30,7 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(
     inner class NewsViewHolder(private val binding: NewsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(newsItem: News) {
+        fun bind(newsItem: NewsDomain) {
             newsItem.setInView(binding)
         }
     }

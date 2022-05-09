@@ -1,4 +1,4 @@
-package com.newsdoubletwobyte.newsapp.data.api
+package com.newsdoubletwobyte.newsapp.data.net.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

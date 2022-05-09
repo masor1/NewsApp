@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.newsdoubletwobyte.newsapp.data.api.NewsRetrofitBuilder
+import com.newsdoubletwobyte.newsapp.data.net.api.NewsRetrofitBuilder
 import com.newsdoubletwobyte.newsapp.data.net.CloudDataSource
 import com.newsdoubletwobyte.newsapp.data.repository.BaseNewsRepository
 import com.newsdoubletwobyte.newsapp.databinding.ActivityMainBinding

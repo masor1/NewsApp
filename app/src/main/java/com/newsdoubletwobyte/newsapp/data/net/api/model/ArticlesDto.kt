@@ -1,12 +1,12 @@
-package com.newsdoubletwobyte.newsapp.data.api.pojo
+package com.newsdoubletwobyte.newsapp.data.net.api.model
 
 import com.google.gson.annotations.SerializedName
 import com.newsdoubletwobyte.newsapp.core.Mapper
-import com.newsdoubletwobyte.newsapp.data.net.pojo.CloudNews
+import com.newsdoubletwobyte.newsapp.data.net.model.CloudNews
 
-data class Articles(
+data class ArticlesDto(
     @SerializedName("source")
-    private val source: Source,
+    private val sourceDto: SourceDto,
     @SerializedName("author")
     private val author: String,
     @SerializedName("title")

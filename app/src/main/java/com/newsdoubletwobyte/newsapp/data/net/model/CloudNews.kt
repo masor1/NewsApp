@@ -1,7 +1,7 @@
-package com.newsdoubletwobyte.newsapp.data.net.pojo
+package com.newsdoubletwobyte.newsapp.data.net.model
 
 import com.newsdoubletwobyte.newsapp.core.Mapper
-import com.newsdoubletwobyte.newsapp.domain.pojo.News
+import com.newsdoubletwobyte.newsapp.domain.model.NewsDomain
 
 data class CloudNews(
     private val author: String?,
@@ -11,9 +11,9 @@ data class CloudNews(
     private val urlToImage: String,
     private val publishedAt: String,
     private val content: String
-) : Mapper<News> {
+) : Mapper<NewsDomain> {
 
-    override fun map() = News(
+    override fun map() = NewsDomain(
         author,
         title,
         description,
