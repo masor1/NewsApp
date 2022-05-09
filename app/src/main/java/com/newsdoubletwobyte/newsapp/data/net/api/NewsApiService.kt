@@ -25,7 +25,7 @@ interface NewsApiService {
         const val QUERY_PAGE = "page"
         const val QUERY_API_KEY = "apiKey"
 
-        const val KEYWORDS = "РИА Новости"
+        const val KEYWORDS = "Животные"
         const val SORT_BY_POPULARITY = "popularity"
         const val LANGUAGE = "ru"
         const val DEFAULT_PAGE = "1"
