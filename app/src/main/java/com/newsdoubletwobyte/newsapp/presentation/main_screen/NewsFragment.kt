@@ -11,6 +11,7 @@ import com.newsdoubletwobyte.newsapp.data.net.api.NewsRetrofitBuilder
 import com.newsdoubletwobyte.newsapp.data.repository.BaseNewsRepository
 import com.newsdoubletwobyte.newsapp.databinding.FragmentNewsBinding
 import com.newsdoubletwobyte.newsapp.domain.usecase.FetchNews
+import com.newsdoubletwobyte.newsapp.presentation.ViewModelFactory
 import com.newsdoubletwobyte.newsapp.presentation.main_screen.adapter.NewsAdapter
 
 class NewsFragment : Fragment() {
@@ -18,7 +19,7 @@ class NewsFragment : Fragment() {
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
 
     override fun onCreateView(
@@ -42,10 +43,10 @@ class NewsFragment : Fragment() {
         val repository = BaseNewsRepository(dataSource)
         viewModel = ViewModelProvider(
             this,
-            MainViewModelFactory(
+            ViewModelFactory(
                 FetchNews.Base(repository)
             )
-        )[MainViewModel::class.java]
+        )[NewsViewModel::class.java]
     }
 
     private fun setupRecyclerView() {

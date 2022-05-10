@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class NewsViewModel(
     private val newsUseCase: FetchNews,
     dispatcher: CoroutineDispatcher = Dispatchers.Main
 ) : ViewModel(), Fetch<Unit> {

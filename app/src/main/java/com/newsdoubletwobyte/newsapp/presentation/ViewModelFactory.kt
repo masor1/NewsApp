@@ -1,19 +1,20 @@
-package com.newsdoubletwobyte.newsapp.presentation.main_screen
+package com.newsdoubletwobyte.newsapp.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.newsdoubletwobyte.newsapp.domain.usecase.FetchNews
+import com.newsdoubletwobyte.newsapp.presentation.main_screen.NewsViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-class MainViewModelFactory(
+class ViewModelFactory(
     private val newsUseCase: FetchNews,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java))
-            return MainViewModel(
+        if (modelClass.isAssignableFrom(NewsViewModel::class.java))
+            return NewsViewModel(
                 newsUseCase,
                 dispatcher
             ) as T
