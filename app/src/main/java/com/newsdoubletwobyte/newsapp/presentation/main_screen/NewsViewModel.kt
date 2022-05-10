@@ -4,16 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.newsdoubletwobyte.newsapp.core.Fetch
-import com.newsdoubletwobyte.newsapp.domain.model.NewsDomain
-import com.newsdoubletwobyte.newsapp.domain.usecase.FetchNews
+import com.newsdoubletwobyte.newsapp.domain.NewsDomain
+import com.newsdoubletwobyte.newsapp.domain.NewsFetchUseCase
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NewsViewModel(
-    private val newsUseCase: FetchNews,
-    dispatcher: CoroutineDispatcher = Dispatchers.Main
+    private val newsFetchUseCaseUseCase: NewsFetchUseCase,
+    dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _news = MutableLiveData<List<NewsDomain>>()
@@ -21,11 +19,12 @@ class NewsViewModel(
 
     init {
         viewModelScope.launch(dispatcher) {
-            fetch()
+            _news.postValue(newsFetchUseCaseUseCase.fetch(FIRST_PAGE))
         }
     }
 
-    private suspend fun fetch() {
-        _news.postValue(newsUseCase.fetch("1"))
+    private companion object {
+
+        const val FIRST_PAGE = "1"
     }
 }

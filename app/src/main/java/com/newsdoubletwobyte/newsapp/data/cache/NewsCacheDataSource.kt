@@ -1,20 +1,18 @@
 package com.newsdoubletwobyte.newsapp.data.cache
 
-import androidx.lifecycle.LiveData
-
 interface NewsCacheDataSource {
 
-    fun save(listOfNewsDb: List<NewsDb>)
+    fun save(listOfNewsCache: List<NewsCache>)
 
-    fun fetch(): List<NewsDb>
+    fun fetch(): List<NewsCache>
 
-    fun fetchById(newsId: Int): NewsDb
+    fun fetchById(newsId: Int): NewsCache
 
     class Base(
         private val newsDao: NewsDao
     ) : NewsCacheDataSource {
 
-        override fun save(listOfNewsDb: List<NewsDb>) = newsDao.save(listOfNewsDb)
+        override fun save(listOfNewsCache: List<NewsCache>) = newsDao.save(listOfNewsCache)
 
         override fun fetch() = newsDao.fetch()
 

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.newsdoubletwobyte.newsapp.databinding.NewsItemBinding
-import com.newsdoubletwobyte.newsapp.domain.model.NewsDomain
+import com.newsdoubletwobyte.newsapp.domain.NewsDomain
 
 class NewsAdapter : ListAdapter<NewsDomain, NewsAdapter.NewsViewHolder>(
     NewsItemDiffCallback()

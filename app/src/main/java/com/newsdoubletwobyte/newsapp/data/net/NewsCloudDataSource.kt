@@ -1,6 +1,5 @@
 package com.newsdoubletwobyte.newsapp.data.net
 
-import com.newsdoubletwobyte.newsapp.core.Fetch
 import com.newsdoubletwobyte.newsapp.data.net.api.NewsApiService
 
 interface NewsCloudDataSource {
@@ -11,6 +10,6 @@ interface NewsCloudDataSource {
         private val newsApiService: NewsApiService
     ) : NewsCloudDataSource {
 
-        override suspend fun fetch(page: String) = newsApiService.fetch(page = page).map()
+        override suspend fun fetch(page: String) = newsApiService.fetch(page).map()
     }
 }

@@ -1,9 +1,10 @@
-package com.newsdoubletwobyte.newsapp.data.repository
+package com.newsdoubletwobyte.newsapp.data
 
+import android.util.Log
 import com.newsdoubletwobyte.newsapp.data.cache.NewsCacheDataSource
 import com.newsdoubletwobyte.newsapp.data.net.NewsCloudDataSource
-import com.newsdoubletwobyte.newsapp.domain.model.NewsDomain
-import com.newsdoubletwobyte.newsapp.domain.repository.NewsRepository
+import com.newsdoubletwobyte.newsapp.domain.NewsDomain
+import com.newsdoubletwobyte.newsapp.domain.NewsRepository
 
 class BaseNewsRepository(
     private val cacheDataSource: NewsCacheDataSource,
@@ -27,6 +28,7 @@ class BaseNewsRepository(
                 }
             }
         } catch (e: Exception) {
+            Log.d(javaClass.simpleName, "Exception: ${e.message}")
             return emptyList()
         }
     }

@@ -1,4 +1,4 @@
-package com.newsdoubletwobyte.newsapp.domain.model
+package com.newsdoubletwobyte.newsapp.domain
 
 import com.newsdoubletwobyte.newsapp.R
 import com.newsdoubletwobyte.newsapp.core.Extension.loadWithGlide
@@ -12,7 +12,7 @@ data class NewsDomain(
     private val imageUrl: String,
     private val date: String
 ) {
-    fun areItemsTheSame(newItem: NewsDomain) = title == newItem.title
+    fun areItemsTheSame(newItem: NewsDomain) = id == newItem.id
 
     fun areContentsTheSame(newItem: NewsDomain) = this == newItem
 

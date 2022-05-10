@@ -1,7 +1,7 @@
 package com.newsdoubletwobyte.newsapp.presentation.main_screen.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.newsdoubletwobyte.newsapp.domain.model.NewsDomain
+import com.newsdoubletwobyte.newsapp.domain.NewsDomain
 
 class NewsItemDiffCallback : DiffUtil.ItemCallback<NewsDomain>() {
 

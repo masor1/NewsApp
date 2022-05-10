@@ -10,9 +10,9 @@ import com.newsdoubletwobyte.newsapp.data.cache.NewsCacheDataSource
 import com.newsdoubletwobyte.newsapp.data.cache.NewsDatabase
 import com.newsdoubletwobyte.newsapp.data.net.NewsCloudDataSource
 import com.newsdoubletwobyte.newsapp.data.net.api.NewsRetrofitBuilder
-import com.newsdoubletwobyte.newsapp.data.repository.BaseNewsRepository
+import com.newsdoubletwobyte.newsapp.data.BaseNewsRepository
 import com.newsdoubletwobyte.newsapp.databinding.FragmentNewsBinding
-import com.newsdoubletwobyte.newsapp.domain.usecase.FetchNews
+import com.newsdoubletwobyte.newsapp.domain.NewsFetchUseCase
 import com.newsdoubletwobyte.newsapp.presentation.ViewModelFactory
 import com.newsdoubletwobyte.newsapp.presentation.main_screen.adapter.NewsAdapter
 
@@ -49,7 +49,7 @@ class NewsFragment : Fragment() {
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(
-                FetchNews.Base(repository)
+                NewsFetchUseCase.Base(repository)
             )
         )[NewsViewModel::class.java]
     }

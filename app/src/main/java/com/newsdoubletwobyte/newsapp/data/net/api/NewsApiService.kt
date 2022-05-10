@@ -8,10 +8,10 @@ interface NewsApiService {
 
     @GET(VALUE_ENDPOINT)
     suspend fun fetch(
+        @Query(QUERY_PAGE) page: String = DEFAULT_PAGE,
         @Query(QUERY_KEYWORDS) keyword: String = KEYWORDS,
         @Query(QUERY_SORT_BY_POPULARITY) sortBy: String = SORT_BY_POPULARITY,
         @Query(QUERY_LANGUAGE) language: String = LANGUAGE,
-        @Query(QUERY_PAGE) page: String = DEFAULT_PAGE,
         @Query(QUERY_API_KEY) apiKey: String = API_KEY
     ): DataDto
 
