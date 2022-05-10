@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val newsUseCase: FetchNews,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.Main
+    dispatcher: CoroutineDispatcher = Dispatchers.Main
 ) : ViewModel(), Fetch<Unit> {
 
     private val _news = MutableLiveData<List<NewsDomain>>()
@@ -26,9 +26,6 @@ class MainViewModel(
     }
 
     override suspend fun fetch(page: String) {
-        viewModelScope.launch(dispatcher) {
-            val news = newsUseCase.fetch(page)
-            _news.postValue(news)
-        }
+        _news.postValue(newsUseCase.fetch(page))
     }
 }
