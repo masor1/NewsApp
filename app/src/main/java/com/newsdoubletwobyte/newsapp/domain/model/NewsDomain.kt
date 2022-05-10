@@ -5,6 +5,7 @@ import com.newsdoubletwobyte.newsapp.core.Extension.loadWithGlide
 import com.newsdoubletwobyte.newsapp.databinding.NewsItemBinding
 
 data class NewsDomain(
+    private val id: Int,
     private val author: String?,
     private val title: String,
     private val description: String,

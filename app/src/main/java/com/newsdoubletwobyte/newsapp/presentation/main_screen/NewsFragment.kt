@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.newsdoubletwobyte.newsapp.data.net.CloudDataSource
+import com.newsdoubletwobyte.newsapp.data.cache.NewsCacheDataSource
+import com.newsdoubletwobyte.newsapp.data.cache.NewsDatabase
+import com.newsdoubletwobyte.newsapp.data.net.NewsCloudDataSource
 import com.newsdoubletwobyte.newsapp.data.net.api.NewsRetrofitBuilder
 import com.newsdoubletwobyte.newsapp.data.repository.BaseNewsRepository
 import com.newsdoubletwobyte.newsapp.databinding.FragmentNewsBinding
@@ -39,8 +41,11 @@ class NewsFragment : Fragment() {
 
     private fun setupViewModel() {
         val apiService = NewsRetrofitBuilder.newsApiServiceService
-        val dataSource = CloudDataSource.Base(apiService)
-        val repository = BaseNewsRepository(dataSource)
+        val cloudDataSource = NewsCloudDataSource.Base(apiService)
+        val cacheDataSource = NewsCacheDataSource.Base(
+            NewsDatabase.getInstance(requireActivity().application).newsDao()
+        )
+        val repository = BaseNewsRepository(cacheDataSource, cloudDataSource)
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(

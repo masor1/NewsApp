@@ -2,7 +2,7 @@ package com.newsdoubletwobyte.newsapp.data.net.api.model
 
 import com.google.gson.annotations.SerializedName
 import com.newsdoubletwobyte.newsapp.core.Mapper
-import com.newsdoubletwobyte.newsapp.data.net.model.CloudNews
+import com.newsdoubletwobyte.newsapp.data.net.NewsCloud
 
 data class ArticlesDto(
     @SerializedName("source")
@@ -18,18 +18,15 @@ data class ArticlesDto(
     @SerializedName("urlToImage")
     private val urlToImage: String,
     @SerializedName("publishedAt")
-    private val publishedAt: String,
-    @SerializedName("content")
-    private val content: String
-) : Mapper<CloudNews> {
+    private val publishedAt: String
+) : Mapper<NewsCloud> {
 
-    override fun map() = CloudNews(
+    override fun map() = NewsCloud(
         author,
         title,
         description,
         url,
         urlToImage,
-        publishedAt,
-        content
+        publishedAt
     )
 }
