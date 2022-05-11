@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.newsdoubletwobyte.newsapp.presentation.news_screen.NewsFragment"
+        android:name="com.masorone.newsapp.presentation.news_screen.NewsFragment"
         android:label="NewsFragment" >
         <action
             android:id="@+id/action_newsFragment_to_newsDetailFragment"
@@ -14,6 +14,6 @@
     </fragment>
     <fragment
         android:id="@+id/newsDetailFragment"
-        android:name="com.newsdoubletwobyte.newsapp.presentation.news_detail_screen.NewsDetailFragment"
+        android:name="com.masorone.newsapp.presentation.news_detail_screen.NewsDetailFragment"
         android:label="NewsDetailFragment" />
 </navigation>
