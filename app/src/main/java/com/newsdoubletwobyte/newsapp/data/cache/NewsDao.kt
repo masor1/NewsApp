@@ -9,11 +9,11 @@ import androidx.room.Query
 interface NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(listOfNewsCache: List<NewsCache>)
+    suspend fun save(listOfNewsCache: List<NewsCache>)
 
     @Query("SELECT * FROM news ORDER BY publishedAt DESC")
-    fun fetch(): List<NewsCache>
+    suspend fun fetch(): List<NewsCache>
 
     @Query("SELECT * FROM news WHERE id == :newsId limit 1")
-    fun fetchById(newsId: Int): NewsCache
+    suspend fun fetchById(newsId: Int): NewsCache
 }

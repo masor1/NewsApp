@@ -8,6 +8,6 @@ interface NewsFetchUseCase : Fetch<List<NewsDomain>> {
         private val repository: NewsRepository
     ) : NewsFetchUseCase {
 
-        override suspend fun fetch(page: String) = repository.fetch(page)
+        override suspend fun fetch() = repository.fetch()
     }
 }

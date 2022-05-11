@@ -11,10 +11,10 @@ class BaseNewsRepository(
     private val cloudDataSource: NewsCloudDataSource
 ) : NewsRepository {
 
-    override suspend fun fetch(page: String): List<NewsDomain> {
+    override suspend fun fetch(): List<NewsDomain> {
         try {
             return if (cacheDataSource.fetch().isEmpty()) {
-                val listOfNewsCloud = cloudDataSource.fetch(page)
+                val listOfNewsCloud = cloudDataSource.fetch(FIRST_PAGE)
                 val listOfNewsDb = listOfNewsCloud.map { newsCloud ->
                     newsCloud.map()
                 }
@@ -31,5 +31,10 @@ class BaseNewsRepository(
             Log.d(javaClass.simpleName, "Exception: ${e.message}")
             return emptyList()
         }
+    }
+
+    companion object {
+
+        private const val FIRST_PAGE = "1"
     }
 }

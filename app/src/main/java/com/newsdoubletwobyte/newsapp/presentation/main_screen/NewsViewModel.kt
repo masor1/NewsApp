@@ -19,12 +19,7 @@ class NewsViewModel(
 
     init {
         viewModelScope.launch(dispatcher) {
-            _news.postValue(newsFetchUseCaseUseCase.fetch(FIRST_PAGE))
+            _news.value = newsFetchUseCaseUseCase.fetch()
         }
-    }
-
-    private companion object {
-
-        const val FIRST_PAGE = "1"
     }
 }

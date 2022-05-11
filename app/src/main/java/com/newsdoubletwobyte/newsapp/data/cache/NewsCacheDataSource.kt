@@ -1,21 +1,17 @@
 package com.newsdoubletwobyte.newsapp.data.cache
 
-interface NewsCacheDataSource {
+import com.newsdoubletwobyte.newsapp.core.CacheDataSource
 
-    fun save(listOfNewsCache: List<NewsCache>)
-
-    fun fetch(): List<NewsCache>
-
-    fun fetchById(newsId: Int): NewsCache
+interface NewsCacheDataSource : CacheDataSource {
 
     class Base(
         private val newsDao: NewsDao
     ) : NewsCacheDataSource {
 
-        override fun save(listOfNewsCache: List<NewsCache>) = newsDao.save(listOfNewsCache)
+        override suspend fun save(data: List<NewsCache>) = newsDao.save(data)
 
-        override fun fetch() = newsDao.fetch()
+        override suspend fun fetch() = newsDao.fetch()
 
-        override fun fetchById(newsId: Int) = newsDao.fetchById(newsId)
+        override suspend fun fetch(id: Int) = newsDao.fetchById(id)
     }
 }

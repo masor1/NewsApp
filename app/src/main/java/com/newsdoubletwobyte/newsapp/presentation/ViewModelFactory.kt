@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 
 class ViewModelFactory(
     private val newsFetchUseCaseUseCase: NewsFetchUseCase,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Main
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

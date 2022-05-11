@@ -1,10 +1,9 @@
 package com.newsdoubletwobyte.newsapp.data.net
 
+import com.newsdoubletwobyte.newsapp.core.CloudDataSource
 import com.newsdoubletwobyte.newsapp.data.net.api.NewsApiService
 
-interface NewsCloudDataSource {
-
-    suspend fun fetch(page: String): List<NewsCloud>
+interface NewsCloudDataSource : CloudDataSource {
 
     class Base(
         private val newsApiService: NewsApiService
