@@ -3,7 +3,7 @@ package com.newsdoubletwobyte.newsapp.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.newsdoubletwobyte.newsapp.domain.NewsFetchUseCase
-import com.newsdoubletwobyte.newsapp.presentation.main_screen.NewsViewModel
+import com.newsdoubletwobyte.newsapp.presentation.news_screen.NewsViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 

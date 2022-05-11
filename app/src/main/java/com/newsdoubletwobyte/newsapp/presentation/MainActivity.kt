@@ -3,7 +3,7 @@ package com.newsdoubletwobyte.newsapp.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.newsdoubletwobyte.newsapp.R
-import com.newsdoubletwobyte.newsapp.presentation.main_screen.NewsFragment
+import com.newsdoubletwobyte.newsapp.presentation.news_screen.NewsFragment
 
 class MainActivity : AppCompatActivity() {
 

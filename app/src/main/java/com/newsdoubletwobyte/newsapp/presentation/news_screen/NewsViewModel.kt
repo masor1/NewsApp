@@ -1,4 +1,4 @@
-package com.newsdoubletwobyte.newsapp.presentation.main_screen
+package com.newsdoubletwobyte.newsapp.presentation.news_screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

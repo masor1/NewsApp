@@ -1,4 +1,4 @@
-package com.newsdoubletwobyte.newsapp.presentation.main_screen
+package com.newsdoubletwobyte.newsapp.presentation.news_screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import com.newsdoubletwobyte.newsapp.data.BaseNewsRepository
 import com.newsdoubletwobyte.newsapp.databinding.FragmentNewsBinding
 import com.newsdoubletwobyte.newsapp.domain.NewsFetchUseCase
 import com.newsdoubletwobyte.newsapp.presentation.ViewModelFactory
-import com.newsdoubletwobyte.newsapp.presentation.main_screen.adapter.NewsAdapter
+import com.newsdoubletwobyte.newsapp.presentation.news_screen.adapter.NewsAdapter
 
 class NewsFragment : Fragment() {
 
