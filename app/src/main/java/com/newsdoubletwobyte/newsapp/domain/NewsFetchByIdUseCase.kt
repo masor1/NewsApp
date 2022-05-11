@@ -1,10 +1,14 @@
 package com.newsdoubletwobyte.newsapp.domain
 
 import com.newsdoubletwobyte.newsapp.core.FetchById
+import javax.inject.Inject
 
-class NewsFetchByIdUseCase(
-    private val repository: NewsRepository
-) : FetchById<Int, NewsDomain> {
+interface NewsFetchByIdUseCase : FetchById<Int, NewsDomain> {
 
-    override suspend fun fetch(id: Int) = repository.fetch(id)
+    class Base @Inject constructor(
+        private val repository: NewsRepository
+    ) : NewsFetchByIdUseCase {
+
+        override suspend fun fetch(id: Int) = repository.fetch(id)
+    }
 }

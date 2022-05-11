@@ -2,10 +2,11 @@ package com.newsdoubletwobyte.newsapp.data.net
 
 import com.newsdoubletwobyte.newsapp.core.CloudDataSource
 import com.newsdoubletwobyte.newsapp.data.net.api.NewsApiService
+import javax.inject.Inject
 
 interface NewsCloudDataSource : CloudDataSource {
 
-    class Base(
+    class Base @Inject constructor(
         private val newsApiService: NewsApiService
     ) : NewsCloudDataSource {
 

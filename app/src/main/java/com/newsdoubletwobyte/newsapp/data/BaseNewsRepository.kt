@@ -5,8 +5,9 @@ import com.newsdoubletwobyte.newsapp.data.cache.NewsCacheDataSource
 import com.newsdoubletwobyte.newsapp.data.net.NewsCloudDataSource
 import com.newsdoubletwobyte.newsapp.domain.NewsDomain
 import com.newsdoubletwobyte.newsapp.domain.NewsRepository
+import javax.inject.Inject
 
-class BaseNewsRepository(
+class BaseNewsRepository @Inject constructor(
     private val cacheDataSource: NewsCacheDataSource,
     private val cloudDataSource: NewsCloudDataSource
 ) : NewsRepository {

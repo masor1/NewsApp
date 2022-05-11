@@ -6,22 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.newsdoubletwobyte.newsapp.data.BaseNewsRepository
-import com.newsdoubletwobyte.newsapp.data.cache.NewsCacheDataSource
-import com.newsdoubletwobyte.newsapp.data.cache.NewsDatabase
-import com.newsdoubletwobyte.newsapp.data.net.NewsCloudDataSource
-import com.newsdoubletwobyte.newsapp.data.net.api.NewsRetrofitBuilder
+import com.newsdoubletwobyte.newsapp.App
 import com.newsdoubletwobyte.newsapp.databinding.FragmentNewsDetailBinding
-import com.newsdoubletwobyte.newsapp.domain.NewsFetchByIdUseCase
-import com.newsdoubletwobyte.newsapp.domain.NewsFetchUseCase
 import com.newsdoubletwobyte.newsapp.presentation.ViewModelFactory
+import javax.inject.Inject
 
 class NewsDetailFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: NewsDetailViewModel
 
     private var _binding: FragmentNewsDetailBinding? = null
     private val binding get() = _binding!!
+
+    private val appComponent by lazy {
+        (requireActivity().application as App).appComponent
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +34,7 @@ class NewsDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
 
         val id = arguments?.getInt("id") ?: 0
@@ -44,18 +47,9 @@ class NewsDetailFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        val apiService = NewsRetrofitBuilder.newsApiServiceService
-        val cloudDataSource = NewsCloudDataSource.Base(apiService)
-        val cacheDataSource = NewsCacheDataSource.Base(
-            NewsDatabase.getInstance(requireActivity().application).newsDao()
-        )
-        val repository = BaseNewsRepository(cacheDataSource, cloudDataSource)
         viewModel = ViewModelProvider(
             this,
-            ViewModelFactory(
-                NewsFetchUseCase.Base(repository),
-                NewsFetchByIdUseCase(repository)
-            )
+            viewModelFactory
         )[NewsDetailViewModel::class.java]
     }
 

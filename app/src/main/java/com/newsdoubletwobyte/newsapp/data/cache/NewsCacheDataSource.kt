@@ -1,10 +1,11 @@
 package com.newsdoubletwobyte.newsapp.data.cache
 
 import com.newsdoubletwobyte.newsapp.core.CacheDataSource
+import javax.inject.Inject
 
 interface NewsCacheDataSource : CacheDataSource {
 
-    class Base(
+    class Base @Inject constructor(
         private val newsDao: NewsDao
     ) : NewsCacheDataSource {
 

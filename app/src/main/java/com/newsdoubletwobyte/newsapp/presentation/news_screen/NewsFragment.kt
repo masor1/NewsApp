@@ -7,26 +7,28 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.newsdoubletwobyte.newsapp.App
 import com.newsdoubletwobyte.newsapp.R
-import com.newsdoubletwobyte.newsapp.data.BaseNewsRepository
-import com.newsdoubletwobyte.newsapp.data.cache.NewsCacheDataSource
-import com.newsdoubletwobyte.newsapp.data.cache.NewsDatabase
-import com.newsdoubletwobyte.newsapp.data.net.NewsCloudDataSource
-import com.newsdoubletwobyte.newsapp.data.net.api.NewsRetrofitBuilder
 import com.newsdoubletwobyte.newsapp.databinding.FragmentNewsBinding
 import com.newsdoubletwobyte.newsapp.domain.NewsDomain
-import com.newsdoubletwobyte.newsapp.domain.NewsFetchByIdUseCase
-import com.newsdoubletwobyte.newsapp.domain.NewsFetchUseCase
 import com.newsdoubletwobyte.newsapp.presentation.ViewModelFactory
 import com.newsdoubletwobyte.newsapp.presentation.news_screen.adapter.NewsAdapter
+import javax.inject.Inject
 
 class NewsFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private lateinit var newsAdapter: NewsAdapter
+    private lateinit var viewModel: NewsViewModel
 
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: NewsViewModel
-    private lateinit var newsAdapter: NewsAdapter
+    private val appComponent by lazy {
+        (requireActivity().application as App).appComponent
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +39,7 @@ class NewsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         setupRecyclerView()
@@ -44,18 +47,9 @@ class NewsFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        val apiService = NewsRetrofitBuilder.newsApiServiceService
-        val cloudDataSource = NewsCloudDataSource.Base(apiService)
-        val cacheDataSource = NewsCacheDataSource.Base(
-            NewsDatabase.getInstance(requireActivity().application).newsDao()
-        )
-        val repository = BaseNewsRepository(cacheDataSource, cloudDataSource)
         viewModel = ViewModelProvider(
             this,
-            ViewModelFactory(
-                NewsFetchUseCase.Base(repository),
-                NewsFetchByIdUseCase(repository)
-            )
+            viewModelFactory
         )[NewsViewModel::class.java]
     }
 
@@ -70,16 +64,13 @@ class NewsFragment : Fragment() {
         }
         newsAdapter.onNewsItemClickListener = object : NewsAdapter.OnNewsItemClickListener {
 
-            override fun onClick(newsItem: NewsDomain) {
-
-                findNavController().navigate(
-                    R.id.action_newsFragment_to_newsDetailFragment,
-                    Bundle().apply {
-                        val passId = newsItem.passId()
-                        putInt(passId.first, passId.second)
-                    }
-                )
-            }
+            override fun onClick(newsItem: NewsDomain) = findNavController().navigate(
+                R.id.action_newsFragment_to_newsDetailFragment,
+                Bundle().apply {
+                    val passId = newsItem.passId()
+                    putInt(passId.first, passId.second)
+                }
+            )
         }
     }
 

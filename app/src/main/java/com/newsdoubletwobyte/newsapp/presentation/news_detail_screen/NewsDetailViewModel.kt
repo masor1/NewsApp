@@ -6,19 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.newsdoubletwobyte.newsapp.domain.NewsDomain
 import com.newsdoubletwobyte.newsapp.domain.NewsFetchByIdUseCase
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsDetailViewModel(
-    private val newsFetchByIdUseCase: NewsFetchByIdUseCase,
-    private val dispatcher: CoroutineDispatcher
+class NewsDetailViewModel @Inject constructor(
+    private val newsFetchByIdUseCase: NewsFetchByIdUseCase
 ) : ViewModel() {
 
     private val _news = MutableLiveData<NewsDomain>()
     var news: LiveData<NewsDomain> = _news
 
     fun fetch(id: Int) {
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch(Dispatchers.Main) {
             _news.value = newsFetchByIdUseCase.fetch(id)
         }
     }
