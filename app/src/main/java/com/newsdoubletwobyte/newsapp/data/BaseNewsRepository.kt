@@ -33,6 +33,8 @@ class BaseNewsRepository(
         }
     }
 
+    override suspend fun fetch(id: Int) = cacheDataSource.fetch(id).map()
+
     companion object {
 
         private const val FIRST_PAGE = "1"

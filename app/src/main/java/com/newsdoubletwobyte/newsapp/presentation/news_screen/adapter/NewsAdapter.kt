@@ -11,6 +11,8 @@ class NewsAdapter : ListAdapter<NewsDomain, NewsAdapter.NewsViewHolder>(
     NewsItemDiffCallback()
 ) {
 
+    var onNewsItemClickListener: OnNewsItemClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val binding = NewsItemBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -31,12 +33,20 @@ class NewsAdapter : ListAdapter<NewsDomain, NewsAdapter.NewsViewHolder>(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(newsItem: NewsDomain) {
-            newsItem.setInView(binding)
+            newsItem.bindNewsItem(binding)
+            binding.root.setOnClickListener {
+                onNewsItemClickListener?.onClick(newsItem)
+            }
         }
     }
 
     companion object {
         const val VIEW_TYPE = 0
         const val MAX_POOL_SIZE = 10
+    }
+
+    interface OnNewsItemClickListener {
+
+        fun onClick(newsItem: NewsDomain)
     }
 }

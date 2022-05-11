@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.newsdoubletwobyte.newsapp.R
+import com.newsdoubletwobyte.newsapp.data.BaseNewsRepository
 import com.newsdoubletwobyte.newsapp.data.cache.NewsCacheDataSource
 import com.newsdoubletwobyte.newsapp.data.cache.NewsDatabase
 import com.newsdoubletwobyte.newsapp.data.net.NewsCloudDataSource
 import com.newsdoubletwobyte.newsapp.data.net.api.NewsRetrofitBuilder
-import com.newsdoubletwobyte.newsapp.data.BaseNewsRepository
 import com.newsdoubletwobyte.newsapp.databinding.FragmentNewsBinding
+import com.newsdoubletwobyte.newsapp.domain.NewsDomain
+import com.newsdoubletwobyte.newsapp.domain.NewsFetchByIdUseCase
 import com.newsdoubletwobyte.newsapp.domain.NewsFetchUseCase
 import com.newsdoubletwobyte.newsapp.presentation.ViewModelFactory
 import com.newsdoubletwobyte.newsapp.presentation.news_screen.adapter.NewsAdapter
@@ -49,7 +53,8 @@ class NewsFragment : Fragment() {
         viewModel = ViewModelProvider(
             this,
             ViewModelFactory(
-                NewsFetchUseCase.Base(repository)
+                NewsFetchUseCase.Base(repository),
+                NewsFetchByIdUseCase(repository)
             )
         )[NewsViewModel::class.java]
     }
@@ -62,6 +67,19 @@ class NewsFragment : Fragment() {
                 NewsAdapter.VIEW_TYPE,
                 NewsAdapter.MAX_POOL_SIZE
             )
+        }
+        newsAdapter.onNewsItemClickListener = object : NewsAdapter.OnNewsItemClickListener {
+
+            override fun onClick(newsItem: NewsDomain) {
+
+                findNavController().navigate(
+                    R.id.action_newsFragment_to_newsDetailFragment,
+                    Bundle().apply {
+                        val passId = newsItem.passId()
+                        putInt(passId.first, passId.second)
+                    }
+                )
+            }
         }
     }
 
