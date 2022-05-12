@@ -39,7 +39,7 @@ interface DataModule {
         @Provides
         @ApplicationScope
         fun provideNewsApiService(): NewsApiService {
-            return NewsRetrofitBuilder.newsApiServiceService
+            return NewsRetrofitBuilder().newsApiServiceService
         }
     }
 }
